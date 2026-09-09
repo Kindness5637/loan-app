@@ -225,7 +225,7 @@ const { login, isLoading: isAuthLoading } = useAuth();
                 {/* Submit Button */}
                 <Button 
                   type="submit" 
-                  className="w-full" 
+                  className="w-full text-white" 
                   disabled={isAuthLoading || isRateLimited}
                 >
                   {isAuthLoading ? (
