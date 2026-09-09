@@ -3,6 +3,7 @@ import { apiService } from '@/services/api';
 import { type Notification } from '@/types/notification';
 import { notificationManager } from '@/utils/NotificationManager';
 import { type LoanApplication } from '@/types/loan';
+import { useAuth } from '@/hooks/use-auth';
 
 interface NotificationContextType {
   notifications: Notification[];
@@ -16,11 +17,14 @@ interface NotificationContextType {
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
 export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = useAuth();
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(false);
   const [lastCheckedLoans, setLastCheckedLoans] = useState<Map<string, string>>(new Map());
 
   const checkForUpdates = async () => {
+    if (!isAuthenticated) return;
+
     try {
       setLoading(true);
       // Fetch current loan applications
@@ -108,6 +112,8 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
   };
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     // Initial check
     checkForUpdates();
 
@@ -123,7 +129,7 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
       clearInterval(interval);
       unsubscribe();
     };
-  }, []);
+  }, [isAuthenticated]);
 
   const markAsRead = (id: string) => {
     notificationManager.markAsRead(id);

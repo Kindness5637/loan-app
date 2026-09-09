@@ -49,6 +49,7 @@ export default function AdminRoutes() {
         
         {/* Member Management */}
         <Route path="new-member" element={<MultiStepMemberForm />} />
+        <Route path="new/member" element={<Navigate to="/new-member" replace />} />
         <Route path="members" element={<Members />} />  
         <Route path="members/view/:id" element={<MemberView />} />
         <Route path="members/update/:id" element={<MemberEdit />} />

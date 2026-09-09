@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { isClientOnly } from "@/utils/roleUtils";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import SLogo from "@/components/SLogo";
 
 export function LoginForm() {
   const [email, setEmail] = useState("");
@@ -131,13 +132,13 @@ const { login, isLoading: isAuthLoading } = useAuth();
 
   return (
     <div className="light">
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center min-w-screen p-4">
-        <div className="w-full max-w-md space-y-6 border-gray-300 border px-4 py-6 shadow-lg rounded-lg bg-white">
+      <div className="min-h-screen bg-[#001D4C] flex items-center justify-center min-w-screen p-4">
+        <div className="w-full max-w-md space-y-6 border border-white/30 px-4 py-6 shadow-lg rounded-lg bg-white/90 backdrop-blur-sm">
           <div className="min-w-content space-y-2">
-            <img src="/logo.png" alt="Techrise LoanPro Logo" className="mx-auto" />
+            <SLogo />
           </div>
 
-          <Card className="bg-white border-gray-200">
+          <Card className="border-0 shadow-none bg-transparent">
             <CardHeader>
               <CardTitle className="text-gray-900">Sign In</CardTitle>
               <CardDescription className="text-gray-600">
@@ -260,7 +261,7 @@ const { login, isLoading: isAuthLoading } = useAuth();
 
           {/* Footer */}
           <div className="text-center text-xs text-gray-500">
-            <p>© 2025 Techrise LoanPro. All rights reserved.</p>
+            <p>© 2025 Stalis LoanPro. All rights reserved.</p>
           </div>
         </div>
       </div>

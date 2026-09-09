@@ -158,7 +158,7 @@ export function HelpSupport() {
               </div>
               <div>
                 <h3 className="font-semibold">Email Us</h3>
-                <p className="text-sm text-muted-foreground">info@techriseglow.co.ke</p>
+                <p className="text-sm text-muted-foreground">info@stalisglow.co.ke</p>
                 <p className="text-xs text-muted-foreground">Response within 24hrs</p>
               </div>
             </div>

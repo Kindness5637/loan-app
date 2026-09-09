@@ -18,13 +18,28 @@ class ApiService {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
+      if (import.meta.env.DEV) {
+        console.info("[API request]", config.method?.toUpperCase(), `${config.baseURL ?? ""}${config.url ?? ""}`);
+      }
       return config;
     });
 
     // handle unauthorized
     this.api.interceptors.response.use(
-      (response: any) => response,
+      (response: any) => {
+        if (import.meta.env.DEV) {
+          console.info("[API response]", response.status, response.config?.url);
+        }
+        return response;
+      },
       async (error: any) => {
+        if (import.meta.env.DEV) {
+          console.error(
+            "[API error]",
+            error.response?.status ?? "NETWORK_ERROR",
+            `${error.config?.baseURL ?? ""}${error.config?.url ?? ""}`,
+          );
+        }
         if (error?.response?.status === 401) {
           this.clearToken();
         }

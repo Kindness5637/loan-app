@@ -1,0 +1,1739 @@
+{
+  "info": {
+    "_postman_id": "e9197c91-1deb-4c7a-997f-84227dae9f92",
+    "name": "Loan management system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "19378510"
+  },
+  "item": [
+    {
+      "name": "Sacco System",
+      "item": [
+        {
+          "name": "Agents",
+          "item": [
+            {
+              "name": "Agents",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{url}}/agents",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "agents"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Agents by phone",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{url}}/agents/by-phone/0998765432",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "agents",
+                    "by-phone",
+                    "0998765432"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Members",
+          "item": [
+            {
+              "name": "All Members",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/vnd.mambu.v2+json",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/members",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "members"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Business Partner Group",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/member-group",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "member-group"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "New Member",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"full_name\": \"Mike Kimuri\",\r\n    \"gender\": \"m\",\r\n    \"phone\": \"0759449071\",\r\n    \"phone2\": \"0759449071\",\r\n    \"email\": \"mike.test@gmail.com\",\r\n    \"id_number\": \"5333812\",\r\n    \"kra_pin\": \"A0125241Z\",\r\n    \"nationality\": \"Kenyan\",\r\n    \"dob\": \"1990-05-15\",\r\n    \"marital_status\": \"married\",\r\n    \"ocupation\": \"Software Engineer\",\r\n    \"address\": \"123 Main Street\",\r\n    \"address2\": \"Central Avenue\",\r\n    \"apartment_name\": \"Sunshine Apartments\",\r\n    \"postal_address\": \"P.O Box 12345-00100\",\r\n    \"employer_name\": \"Tech Solutions Ltd\",\r\n    \"employer_address\": \"456 Business Park\",\r\n    \"employer_phone\": \"0712343211\",\r\n    \"employer_phone_2\": \"0717654111\",\r\n    \"position\": \"Senior Developer\",\r\n    \"employment_type\": \"permanent\",\r\n    \"monthly_income\": 75000,\r\n    \"others_income\": 15000,\r\n    \"monthly_expenses\": 50000,\r\n    \"bank_name\": \"Equity Bank\",\r\n    \"bank_branch\": \"Mombasa Branch\",\r\n    \"bank_account_number\": \"0123456789012\",\r\n    \"nok_full_name\": \"Jane Doe\",\r\n    \"nok_relation\": \"Spouse\",\r\n    \"nok_phone\": \"0712335432\",\r\n    \"nok_email\": \"jane.doe@email.com\",\r\n    \"nok_address\": \"123 Main Street, Nairobi\",\r\n    \"mode_of_contribution\": \"m\",\r\n    \"payment_mode\": \"\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}/members",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "members"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Approve member",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"id\": \"BP000010\",\r\n    \"firstName\": \"POST\",\r\n    \"lastName\": \"MAMBU clientss\", \r\n    \"encodedKey\": \"8a8e87bd9719a2cd01971b1391da217a\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/18/approve",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "18",
+                    "approve"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get member",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/members/271446007",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "members",
+                    "271446007"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update member",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n            \"encodedKey\": \"8a8e87e2974d8e2c0197537ceb861681\",\r\n            \"id\": \"390364511\",\r\n            \"creationDate\": \"2025-06-09T11:52:03+03:00\",\r\n            \"lastModifiedDate\": \"2025-06-10T08:43:29+03:00\",\r\n            \"activationDate\": \"2025-06-10T08:43:29+03:00\",\r\n            \"approvedDate\": \"2025-06-09T11:52:04+03:00\",\r\n            \"firstName\": \"Mike\",\r\n            \"lastName\": \"Kimuri\",\r\n            \"middleName\": \"Muya\",\r\n            \"preferredLanguage\": \"ENGLISH\",\r\n            \"clientRoleKey\": \"8a8e86a596681caf01968703eed2448a\",\r\n            \"loanCycle\": 0,\r\n            \"_Client_Details\": {\r\n                \"postal_address\": \"P.O Box 12345-00100\",\r\n                \"nok_address\": \"123 Main Street, Nairobi\",\r\n                \"ocupation\": \"Software Engineer\",\r\n                \"address\": \"123 Main Street\",\r\n                \"nok_email\": \"test@mambu.com\",\r\n                \"nok_phone\": \"0712335432\",\r\n                \"employer_phone\": \"0712343211\",\r\n                \"apartment_name\": \"Sunshine Apartments\",\r\n                \"employer_name\": \"Tech Solutions Ltd\",\r\n                \"monthly_income\": \"75000.00\",\r\n                \"others_income\": \"15000.00\",\r\n                \"employer_address\": \"456 Business Park\",\r\n                \"marital_status\": \"married\",\r\n                \"nok_full_name\": \"Jane Doe\",\r\n                \"employer_phone_2\": \"0717654111\",\r\n                \"position\": \"Senior Developer\",\r\n                \"nok_relation\": \"Spouse\",\r\n                \"monthly_expenses\": \"50000.00\"\r\n            }\r\n        }",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/members/8a8e87e2974d8e2c0197537ceb861681",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "members",
+                    "8a8e87e2974d8e2c0197537ceb861681"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Loan Application",
+          "item": [
+            {
+              "name": "Loan Products",
+              "item": [
+                {
+                  "name": "Create",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"loanType\": \"Emergency Loan\",\r\n    \"interest_rate\": 12.50,\r\n    \"repaymentMethod\": \"FLAT\",\r\n    \"repayPeriod\": 12,\r\n    \"minLoan\": 5000,\r\n    \"maxLoan\": 500000,\r\n    \"requiresConsecutiveSavings\": true,\r\n    \"consecutiveSavingsMonths\": 6,\r\n    \"minimumSavings\": 1000,\r\n    \"requiresGuarantors\": true,\r\n    \"requiredGuaranties\": 50,\r\n    \"requiresCollateral\": false,\r\n    \"attractsPenalty\": true,\r\n    \"penaltyRate\": 2.5,\r\n    \"requiresCrbCertificate\": true,\r\n    \"crbPoints\": 100,\r\n    \"loanFormCost\": 200\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/loan-types",
+                      "host": [
+                        "{{url}}"
+                      ],
+                      "path": [
+                        "loan-types"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Get All",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{url}}/loan-types",
+                      "host": [
+                        "{{url}}"
+                      ],
+                      "path": [
+                        "loan-types"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Get By loanCode",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{url}}/loan-types/N002",
+                      "host": [
+                        "{{url}}"
+                      ],
+                      "path": [
+                        "loan-types",
+                        "N002"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Update",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "PUT",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"data\": {\r\n        \"id\": 1,\r\n        \"organization_id\": 1,\r\n        \"loanCode\": \"E001\",\r\n        \"loanType\": \"Emergency Loan\",\r\n        \"profile\": {\r\n            \"repaymentMethod\": \"FLAT\",\r\n            \"repayPeriod\": 12,\r\n            \"minLoan\": 0,\r\n            \"maxLoan\": 500000,\r\n            \"requiresConsecutiveSavings\": true,\r\n            \"consecutiveSavingsMonths\": 6,\r\n            \"minimumSavings\": 1000,\r\n            \"requiresGuarantors\": true,\r\n            \"requiredGuaranties\": 50,\r\n            \"requiresCollateral\": false,\r\n            \"attractsPenalty\": true,\r\n            \"penaltyRate\": 2.5,\r\n            \"requiresCrbCertificate\": true,\r\n            \"crbPoints\": 100,\r\n            \"loanFormCost\": 200\r\n        },\r\n        \"is_active\": 1,\r\n        \"created_at\": \"2025-09-30T15:30:04.000000Z\",\r\n        \"updated_at\": \"2025-09-30T15:30:04.000000Z\",\r\n        \"interest_rate\": \"12.50\"\r\n    }\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/loan-types/E001",
+                      "host": [
+                        "{{url}}"
+                      ],
+                      "path": [
+                        "loan-types",
+                        "E001"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "Delete",
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{token}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{url}}/loan-types/N002",
+                      "host": [
+                        "{{url}}"
+                      ],
+                      "path": [
+                        "loan-types",
+                        "N002"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
+              ]
+            },
+            {
+              "name": "By client",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/loans-applications/business-partner/102617451",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loans-applications",
+                    "business-partner",
+                    "102617451"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Singe Loan Account",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/loan-applications/LN-ELA46",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loan-applications",
+                    "LN-ELA46"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Loan Applications",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/loan-applications",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loan-applications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Create Loan Application",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"borrower_id\": 1,\n    \"loan_type_id\": 1,\n    \"principal_amount\": 50000,\n    \"loan_duration\": 12,\n    \"purpose\": \"Business expansion\",\n    \"collateral\": \"Motor vehicle\",\n    \"transaction_reference\": \"mpesa\",\n    \"from_this_account\": \"Mobile App\",\n    \"guarantors\": [\n        {\n            \"business_partner_id\": 2,\n            \"amount_guaranteed\": 25000\n        },\n        {\n            \"business_partner_id\": 3,\n            \"amount_guaranteed\": 25000\n        }\n    ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/loan-applications",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loan-applications"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Disburse Loan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"amount\": 50000.00,\r\n  \"disbursement_method\": \"mpesa\",\r\n  \"notes\": \"Disbursed via M-Pesa to borrower account\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/LN-NLA1B/disburse",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLA1B",
+                    "disburse"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Transactions per account",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/loans-applications/BFTJ956/transactions",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loans-applications",
+                    "BFTJ956",
+                    "transactions"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All transactions",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/loan-transactions/all",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loan-transactions",
+                    "all"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Repay Loan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"amount\": 500.00,\r\n  \"payment_method\": \"mpesa\",\r\n  \"payment_date\": \"2025-10-07\",\r\n  \"reference\": \"TDCHJVDC\",\r\n  \"notes\": \"Monthly installment payment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/LN-NLFEB/repay",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLFEB",
+                    "repay"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Pay Off",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"payment_method\": \"bank\",\r\n  \"reference\": \"TYIVWCH8\",\r\n  \"notes\": \"Full loan settlement\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/LN-NLFEB/pay-off",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLFEB",
+                    "pay-off"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "get preview",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"loan_type_id\": 1,\r\n  \"principal_amount\": 50000,\r\n  \"loan_duration\": 12\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/loan-schedule-preview",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loan-schedule-preview"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Approve loan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/LN-NLA1B/approve",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLA1B",
+                    "approve"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Reject Loan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/LN-NLFEB/reject",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLFEB",
+                    "reject"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Offset Loan",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"amount\": 10000.00,\r\n  \"offset_date\": \"2025-10-07\",\r\n  \"notes\": \"Partial offset payment\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/LN-NLA1B/offset",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLA1B",
+                    "offset"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Statement",
+          "item": [
+            {
+              "name": "Loan Statement",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/loan-statement/LN-NL6BB",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "loan-statement",
+                    "LN-NL6BB"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "User",
+          "item": [
+            {
+              "name": "User-roles",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/user-roles",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "user-roles"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "All Users",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/users",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "User",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"member_id\": 1,\r\n    \"name\": \"Jayson Yegon\",\r\n    \"email\": \"jayson.yegon@example.com\",\r\n    \"password\": \"1234\",\r\n    \"roles\": [\"loan_officer\", \"approver\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/users",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "users"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"member_id\":2,\r\n    \"name\": \"Jayson alfie\",\r\n    \"email\": \"jayson.alfie@example.com\",\r\n    \"password\": \"Trading@123\",\r\n    \"roles\": [\"loan_officer\", \"approver\"]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/users/2",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get User",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  },
+                  {
+                    "key": "storeid",
+                    "value": "48",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{url}}/users/2",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete user",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{url}}/users/1",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "users",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Settings",
+          "item": [
+            {
+              "name": "Create settings",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"setting_key\": \"top_up_loan_coverage\",\r\n    \"setting_value\": \"50\",\r\n    \"description\": \"Top up loan coverage\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/settings",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "settings"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get settings",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{url}}/settings",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "settings"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Comments",
+          "item": [
+            {
+              "name": "Single comment",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{url}}/LN-NLA1B/comments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLA1B",
+                    "comments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "publish comment",
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{ \r\n    \"comment\": \"closed loan\"\r\n}"
+                },
+                "url": {
+                  "raw": "{{url}}/LN-NLA1B/comments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "LN-NLA1B",
+                    "comments"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Comments",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{token}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-Requested-With",
+                    "value": "XMLHttpRequest",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": ""
+                },
+                "url": {
+                  "raw": "{{url}}/comments",
+                  "host": [
+                    "{{url}}"
+                  ],
+                  "path": [
+                    "comments"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Dashboard",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Requested-With",
+                "value": "XMLHttpRequest",
+                "type": "text"
+              },
+              {
+                "key": "storeid",
+                "value": "48",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/dashboard",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "dashboard"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Requested-With",
+                "value": "XMLHttpRequest",
+                "type": "text"
+              },
+              {
+                "key": "storeid",
+                "value": "48",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/profile",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Token",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Requested-With",
+                "value": "XMLHttpRequest",
+                "type": "text"
+              },
+              {
+                "key": "storeid",
+                "value": "48",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "email",
+                  "value": "{{email}}",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "{{password}}",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{url}}/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "All transactions",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/transactions",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "transactions"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "password\n",
+      "value": "",
+      "type": "default"
+    },
+    {
+      "key": "email",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

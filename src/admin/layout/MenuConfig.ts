@@ -19,8 +19,8 @@ import {
 import type { SidebarProps } from "@/components/layout/Sidebar";
 
 export const adminMenuConfig: SidebarProps = {
-  brandLogo: "/logo.png",
-  brandName: "Techrise Glow",
+  brandLogo: "/logo-transparent.png",
+  brandName: "Stalis Glow",
   brandSubtitle: "Loan Application Management",
   brandUrl: "/",
   menuGroups: [

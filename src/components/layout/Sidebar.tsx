@@ -49,7 +49,18 @@ const AppSidebar = ({
             <SidebarMenuButton size="lg" asChild tooltip={brandName}>
               <Link to={brandUrl}>
                 {brandLogo ? (
-                  <img src={brandLogo} alt={brandName} />
+                              <span className="relative block h-auto max-w-full">
+                    <img
+                      src={brandLogo}
+                      alt={brandName}
+                                  className="block h-auto max-w-full"
+                    />
+                    <img
+                                  src={brandLogo}
+                      alt={brandName}
+                                  className="pointer-events-none absolute inset-0 hidden h-full w-full max-w-full object-contain object-left dark:block dark:brightness-0 dark:invert [clip-path:polygon(32%_0,100%_0,100%_100%,32%_100%)]"
+                    />
+                              </span>
                 ) : (
                   <CreditCard className="size-4" />
                 )}

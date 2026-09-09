@@ -66,7 +66,7 @@ export const Members = () => {
 
     addButton: {
       label: "Add New Client",
-      link: "/new/member",
+      link: "/new-member",
       icon: <Plus size={18} />,
     },
 
