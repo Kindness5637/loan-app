@@ -23,6 +23,7 @@ import { UserProfile } from "./pages/userProfile";
 import { Reports } from "./reports/Reports";
 import Analytics from "./reports/Analytics";
 import LoanPreview from "./pages/Credit services/loanPreview";
+import LoanBalances from "./pages/Credit services/LoanBalances";
 import { CreateUser } from "./pages/Member Management/createUser";
 import User from "./pages/Member Management/Users";
 import { LoanProductDetail } from "./pages/Credit services/LoanProductDetails";
@@ -66,6 +67,7 @@ export default function AdminRoutes() {
         <Route path="loan/edit/:id" element={<LoanEdit />} />
         <Route path="loan-application" element={<LoanApplication />} /> 
         <Route path="loan-preview" element={<LoanPreview />} />
+        <Route path="loan-balances" element={<LoanBalances />} />
         
         {/* Deposit Services */}
         <Route path="deposit-accounts" element={<DepositAccounts />} />

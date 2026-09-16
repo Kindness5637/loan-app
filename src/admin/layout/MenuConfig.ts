@@ -9,6 +9,7 @@ import {
   Table,
   User,
   ListPlus,
+  Wallet,
   // FileSearch2,
   Clipboard,
   ClipboardPlus,
@@ -19,7 +20,7 @@ import {
 import type { SidebarProps } from "@/components/layout/Sidebar";
 
 export const adminMenuConfig: SidebarProps = {
-  brandLogo: "/logo-transparent.png",
+  brandLogo: "/assets/official-logo.png",
   brandName: "Stalis Glow",
   brandSubtitle: "Loan Application Management",
   brandUrl: "/",
@@ -78,6 +79,12 @@ export const adminMenuConfig: SidebarProps = {
           title: "Loan Portfolio",
           url: "/loan-portfolio",
           icon: Clipboard,
+        },
+
+        {
+          title: "Loan Balances",
+          url: "/loan-balances",
+          icon: Wallet,
         },
 
         {

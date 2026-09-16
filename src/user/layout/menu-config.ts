@@ -8,7 +8,7 @@ import {
 import type { SidebarProps } from "@/components/layout/Sidebar";
 
 export const clientMenuConfig: SidebarProps = {
-  brandLogo: "/logo-transparent.png",
+  brandLogo: "/assets/official-logo.png",
 
   brandName: "Stalis LendPro",
   brandSubtitle: "Client Portal",

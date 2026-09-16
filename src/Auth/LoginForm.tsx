@@ -261,7 +261,7 @@ const { login, isLoading: isAuthLoading } = useAuth();
 
           {/* Footer */}
           <div className="text-center text-xs text-gray-500">
-            <p>© 2025 Stalis LoanPro. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Stalis LoanPro. All rights reserved.</p>
           </div>
         </div>
       </div>
