@@ -168,37 +168,18 @@ export default function LoanDetails() {
       return;
     }
 
-    // Create a style element and add it to the document
     const styleElement = document.createElement('style');
+    styleElement.id = 'print-styles';
     styleElement.innerHTML = printStyles;
     document.head.appendChild(styleElement);
 
-    // Add print header
-    const existingPrintHeader = document.querySelector('.print-header');
-    if (!existingPrintHeader) {
-      const printHeader = document.createElement('div');
-      printHeader.className = 'print-header';
-      printHeader.innerHTML = `
-        <h1 style="margin: 0; font-size: 24px; font-weight: bold;">Loan Application Details</h1>
-        <p style="margin: 5px 0; font-size: 14px;">Generated on ${new Date().toLocaleDateString()}</p>
-        <p style="margin: 5px 0; font-size: 14px;">Loan Number: ${loan.loan_number}</p>
-      `;
-      document.body.insertBefore(printHeader, document.body.firstChild);
-    }
-
-    // Trigger print
     window.print();
 
-    // Clean up after printing
     const cleanup = () => {
-      document.head.removeChild(styleElement);
-      const printHeader = document.querySelector('.print-header');
-      if (printHeader) {
-        document.body.removeChild(printHeader);
-      }
+      const el = document.getElementById('print-styles');
+      if (el) el.remove();
       window.removeEventListener('afterprint', cleanup);
     };
-
     window.addEventListener('afterprint', cleanup);
   };
 
@@ -311,8 +292,8 @@ export default function LoanDetails() {
         )}
       </div>
 
-      {/* Screen layout below */}
-      {/* Header - Hidden during print */}
+      {/* Screen layout below - hidden during print */}
+      <div className="no-print">
       <Card className="border-b-solid p-6 shadow-lg no-print">
         <div className="border-b-solid max-w-7xl mx-auto">
           <div className="flex justify-between items-start">
@@ -743,6 +724,7 @@ export default function LoanDetails() {
         confirmText="Disburse"
         cancelText="Cancel"
       />
+      </div>
     </div>
   );
 }
