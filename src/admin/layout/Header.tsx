@@ -74,7 +74,6 @@ const AdminHeader = () => {
       showNotifications={true}
       showUserMenu={true}
       userInfo={mappedUserInfo}
-      notificationCount={3}
       onSearch={(q) => console.log("Admin search:", q)}
       onProfileClick={profile}
       onSettingsClick={() =>

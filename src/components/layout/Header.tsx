@@ -35,7 +35,7 @@ interface HeaderProps {
   showUserMenu?: boolean;
   showViewSwitch?: boolean;
   showNotifications: boolean;
-  notificationCount: number;
+  notificationCount?: number;
   userInfo?: {
     name: string;
     email: string;

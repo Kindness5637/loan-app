@@ -18,7 +18,7 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 
 export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useAuth();
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<Notification[]>(notificationManager.getNotifications());
   const [loading, setLoading] = useState(false);
   const [lastCheckedLoans, setLastCheckedLoans] = useState<Map<string, string>>(new Map());
 
@@ -114,10 +114,11 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
   useEffect(() => {
     if (!isAuthenticated) return;
 
-    // Initial check
-    checkForUpdates();
+    // Sync notifications from manager on mount
+    setNotifications([...notificationManager.getNotifications()]);
 
-    // Check for updates every 30 seconds
+    // Check for updates immediately and every 30 seconds
+    checkForUpdates();
     const interval = setInterval(checkForUpdates, 30000);
 
     // Subscribe to notification changes
