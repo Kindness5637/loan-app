@@ -467,23 +467,23 @@ export default function LoanDetails() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-4">
-                <div className="bg-green-50 rounded-lg p-4">
-                  <p className="text-sm text-green-700 font-medium">Total Paid</p>
-                  <p className="font-bold text-2xl text-green-600">{formatCurrency(statement.summary.total_paid)}</p>
+                <div className="bg-green-50 dark:bg-transparent rounded-lg p-4">
+                  <p className="text-sm text-green-700 dark:text-green-400 font-medium">Total Paid</p>
+                  <p className="font-bold text-2xl text-green-600 dark:text-green-400">{formatCurrency(statement.summary.total_paid)}</p>
                 </div>
-                <div className="bg-blue-50 rounded-lg p-4">
-                  <p className="text-sm text-blue-700 font-medium">Total Interest</p>
-                  <p className="font-bold text-2xl text-blue-600">{formatCurrency(statement.summary.total_interest)}</p>
+                <div className="bg-blue-50 dark:bg-transparent rounded-lg p-4">
+                  <p className="text-sm text-blue-700 dark:text-blue-400 font-medium">Total Interest</p>
+                  <p className="font-bold text-2xl text-blue-600 dark:text-blue-400">{formatCurrency(statement.summary.total_interest)}</p>
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="bg-red-50 rounded-lg p-4">
-                  <p className="text-sm text-red-700 font-medium">Total Penalties</p>
-                  <p className="font-bold text-2xl text-red-600">{formatCurrency(statement.summary.total_penalties)}</p>
+                <div className="bg-red-50 dark:bg-transparent rounded-lg p-4">
+                  <p className="text-sm text-red-700 dark:text-red-400 font-medium">Total Penalties</p>
+                  <p className="font-bold text-2xl text-red-600 dark:text-red-400">{formatCurrency(statement.summary.total_penalties)}</p>
                 </div>
-                <div className="bg-orange-50 rounded-lg p-4">
-                  <p className="text-sm text-orange-700 font-medium">Outstanding Balance</p>
-                  <p className="font-bold text-2xl text-orange-600">{formatCurrency(statement.summary.current_balance)}</p>
+                <div className="bg-orange-50 dark:bg-transparent rounded-lg p-4">
+                  <p className="text-sm text-orange-700 dark:text-orange-400 font-medium">Outstanding Balance</p>
+                  <p className="font-bold text-2xl text-orange-600 dark:text-orange-400">{formatCurrency(statement.summary.current_balance)}</p>
                 </div>
               </div>
             </div>
