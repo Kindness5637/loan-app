@@ -43,7 +43,6 @@ interface HeaderProps {
     initials: string;
   };
   onSearch?: (query: string) => void;
-  onNotificationClick?: () => void;
   onProfileClick?: () => void;
   onSettingsClick?: () => void;
   onSwitchUserView?: () => void;
@@ -59,7 +58,6 @@ const Header = ({
   notificationCount,
   userInfo,
   onSearch,
-  onNotificationClick,
   onProfileClick,
   onSettingsClick,  
   onLogoutClick,
