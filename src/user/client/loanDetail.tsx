@@ -10,7 +10,6 @@ import {
   DollarSign,
   Calendar,
   FileText,
-  User,
   TrendingUp,
   AlertCircle,
   CheckCircle,
@@ -56,6 +55,7 @@ interface LoanStatement {
 }
 
 interface LoanDetail extends Loan {
+  created_at: string
   repayment_amount: string
   interest_method: string
   duration_period: string
@@ -65,6 +65,11 @@ interface LoanDetail extends Loan {
   last_payment_date: string | null
   approved_at: string | null
   disbursed_at: string | null
+  loan_type: {
+    loanCode: string
+    loanType: string
+    interest_rate: string
+  }
   guarantors: {
     id: number
     amount_guaranteed: string
@@ -315,7 +320,7 @@ export default function LoanDetail() {
                   <span className="font-semibold">{formatCurrency(loan.principal_amount)}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Interest ({loan.loan_type.interest_rate}%)</span>
+                  <span className="text-sm text-muted-foreground">Interest ({loan.loan_type?.interest_rate}%)</span>
                   <span className="font-semibold text-blue-600">{formatCurrency(loan.interest_amount)}</span>
                 </div>
                 <div className="border-t pt-3">
