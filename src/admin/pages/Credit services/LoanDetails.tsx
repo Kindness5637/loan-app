@@ -167,20 +167,7 @@ export default function LoanDetails() {
       toast.error('No loan data available to print');
       return;
     }
-
-    const styleElement = document.createElement('style');
-    styleElement.id = 'print-styles';
-    styleElement.innerHTML = printStyles;
-    document.head.appendChild(styleElement);
-
     window.print();
-
-    const cleanup = () => {
-      const el = document.getElementById('print-styles');
-      if (el) el.remove();
-      window.removeEventListener('afterprint', cleanup);
-    };
-    window.addEventListener('afterprint', cleanup);
   };
 
   if (loading) {
@@ -201,8 +188,10 @@ export default function LoanDetails() {
 
   return (
     <>
+      <style dangerouslySetInnerHTML={{ __html: printStyles }} />
+      
       {/* ========== PRINT-ONLY DOCUMENT ========== */}
-      <div className="print-only" style={{ display: 'none' }}>
+      <div className="print-only">
         <div className="print-header">
           <h1>Loan Application Details</h1>
           <p>Loan Number: {loan.loan_number} | Generated: {new Date().toLocaleDateString()}</p>
