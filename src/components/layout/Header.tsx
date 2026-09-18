@@ -138,8 +138,6 @@ const Header = ({
 
               </div>
             )}
-                    <NotificationBell />
-
 
             {/* Notification Bell and Theme Toggle - Aligned together */}
             <div className="flex items-center gap-1">
