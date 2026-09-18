@@ -550,8 +550,19 @@ export default function LoanBalances() {
                             <Button
                               variant="ghost"
                               size="sm"
-                              onClick={() => navigate(`/members/view/${c.borrowerId}`)}
-                              title="View customer profile"
+                              onClick={() => {
+                                const customerLoans = filteredLoans.filter(
+                                  (l) => l.borrower_id === c.borrowerId
+                                );
+                                const activeLoan =
+                                  customerLoans.find(
+                                    (l) => l.loan_status === "active" || l.loan_status === "disbursed"
+                                  ) || customerLoans[0];
+                                if (activeLoan) {
+                                  navigate(`/loan-portfolio/${activeLoan.loan_number}`);
+                                }
+                              }}
+                              title="View loan details"
                             >
                               <Eye className="h-4 w-4" />
                             </Button>

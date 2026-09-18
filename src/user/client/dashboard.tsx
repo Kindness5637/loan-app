@@ -489,8 +489,8 @@ export function ClientDashboard() {
                   return (
                     <div
                       key={loan.id}
-                      className="p-3 sm:p-4 border rounded-lg active:bg-muted transition-colors"
-                      onClick={() => navigate("/client/loans")}
+                      className="p-3 sm:p-4 border rounded-lg active:bg-muted transition-colors cursor-pointer"
+                      onClick={() => navigate(`/client/loans/${loan.loan_number}`)}
                     >
                       <div className="flex items-start justify-between mb-3 gap-2">
                         <div className="flex items-start space-x-2 flex-1 min-w-0">
@@ -546,7 +546,13 @@ export function ClientDashboard() {
                           <Calendar className="h-3 w-3" />
                           {formatDate(loan.loan_due_date)}
                         </div>
-                        <span className="text-primary font-medium flex items-center gap-1">
+                        <span
+                          className="text-primary font-medium flex items-center gap-1 cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            navigate(`/client/loans/${loan.loan_number}`)
+                          }}
+                        >
                           Details
                           <ChevronRight className="h-3 w-3" />
                         </span>

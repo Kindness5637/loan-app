@@ -15,6 +15,7 @@ import {
   FileJson,
   FileText as FileTextIcon,
   FileCode2,
+  Eye,
 } from "lucide-react"
 import { apiService } from "@/services/api"
 import { formatCurrency, formatDate } from "@/lib/utils"
@@ -453,6 +454,15 @@ export default function MyLoans() {
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-56">
+                          <DropdownMenuItem 
+                            onClick={() => navigate(`/client/loans/${loan.loan_number}`)}
+                            className="cursor-pointer"
+                          >
+                            <Eye className="h-4 w-4 mr-2" />
+                            View Details
+                            <ArrowRight className="h-4 w-4 ml-2" />
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
                           <DropdownMenuItem 
                             onClick={() => navigate(`/client/statements/${loan.loan_number}`)}
                             className="cursor-pointer"

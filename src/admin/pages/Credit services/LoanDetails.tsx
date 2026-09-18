@@ -13,7 +13,8 @@ import {
   XCircle,
   HandCoins,
   Banknote,
-  Wallet
+  Wallet,
+  TrendingUp,
 } from 'lucide-react';
 import { type LoanApplication } from '@/types/loan';
 import { formatCurrency, formatDate } from '@/lib/utils';
@@ -21,11 +22,44 @@ import { apiService } from '@/services/api';
 import { toast } from 'sonner';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Progress } from '@/components/ui/progress';
 import { printStyles } from '@/components/common/print';
 import { ConfirmDialog } from '@/components/confirmDialog';
 import { RepaymentDialog } from '@/components/loans/RepaymentDialog';
 import { PayoffDialog } from '@/components/loans/PayoffDialog';
 import { OffsetDialog } from '@/components/loans/OffsetDialog';
+
+interface LoanStatementData {
+  loan: {
+    loan_number: string
+    principal_amount: string
+    loan_release_date: string
+    balance: string
+    loan_status: string
+  }
+  borrower: {
+    full_name: string
+    phone: string
+    CardCode: string
+  }
+  transactions: {
+    date: string
+    type: string
+    bal_bd: number
+    payment: number
+    interest: number
+    penalty: number
+    balance: number
+  }[]
+  summary: {
+    total_paid: number
+    total_penalties: number
+    total_interest: number
+    current_balance: number
+  }
+  generated_at: string
+}
 
 const getStatusColor = (status: string) => {
   const colors: Record<string, string> = {
@@ -46,6 +80,7 @@ const getStatusText = (status: string) => {
 export default function LoanDetails() {
   const { loanNumber } = useParams<{ loanNumber: string }>();
   const [loan, setLoan] = useState<LoanApplication | null>(null);
+  const [statement, setStatement] = useState<LoanStatementData | null>(null);
   const [loading, setLoading] = useState(true);
   
   // Dialog states
@@ -69,8 +104,12 @@ export default function LoanDetails() {
   const fetchLoanDetails = async () => {
     try {
       setLoading(true);
-      const response = await apiService.get<LoanApplication>(`/loan-applications/${loanNumber}`);
-      setLoan(response.data);
+      const [loanResponse, statementResponse] = await Promise.all([
+        apiService.get<LoanApplication>(`/loan-applications/${loanNumber}`),
+        apiService.get<{ data: LoanStatementData }>(`/loan-statement/${loanNumber}`).catch(() => ({ data: null })),
+      ]);
+      setLoan(loanResponse.data);
+      setStatement(statementResponse.data);
     } catch (error) {
       toast.error('Failed to load loan details');
       console.error('Error fetching loan:', error);
@@ -181,6 +220,98 @@ export default function LoanDetails() {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Print-only clean document layout */}
+      <div className="print-only" style={{ display: 'none' }}>
+        <div className="print-header">
+          <h1>Loan Application Details</h1>
+          <p>Loan Number: {loan.loan_number} | Generated: {new Date().toLocaleDateString()}</p>
+        </div>
+
+        <h2>Borrower Information</h2>
+        <div className="flex justify-between"><span>Full Name</span><span>{loan.borrower.full_name}</span></div>
+        <div className="flex justify-between"><span>Phone</span><span>{loan.borrower.phone}</span></div>
+        <div className="flex justify-between"><span>ID Number</span><span>{loan.borrower.id_number}</span></div>
+        {loan.borrower.email && <div className="flex justify-between"><span>Email</span><span>{loan.borrower.email}</span></div>}
+        {loan.borrower.nationality && <div className="flex justify-between"><span>Nationality</span><span>{loan.borrower.nationality}</span></div>}
+
+        <h2>Loan Information</h2>
+        <div className="flex justify-between"><span>Loan Number</span><span>{loan.loan_number}</span></div>
+        <div className="flex justify-between"><span>Loan Type</span><span>{loan.loan_type.loanType} ({loan.loan_type.loanCode})</span></div>
+        <div className="flex justify-between"><span>Status</span><span>{loan.loan_status?.toUpperCase()}</span></div>
+        <div className="flex justify-between"><span>Purpose</span><span>{loan.purpose}</span></div>
+        <div className="flex justify-between"><span>Collateral</span><span>{loan.collateral || 'None'}</span></div>
+        <div className="flex justify-between"><span>Duration</span><span>{loan.loan_duration} {loan.duration_period}</span></div>
+        <div className="flex justify-between"><span>Interest Method</span><span>{loan.interest_method}</span></div>
+        <div className="flex justify-between"><span>Interest Rate</span><span>{loan.loan_type.interest_rate}%</span></div>
+
+        <h2>Financial Summary</h2>
+        <div className="flex justify-between"><span>Principal Amount</span><span>{formatCurrency(loan.principal_amount)}</span></div>
+        <div className="flex justify-between"><span>Interest Amount</span><span>{formatCurrency(loan.interest_amount)}</span></div>
+        <div className="flex justify-between"><span>Total Repayment</span><span>{formatCurrency(loan.repayment_amount)}</span></div>
+        <div className="flex justify-between"><span>Monthly Payment</span><span>{formatCurrency(loan.monthly_payment)}</span></div>
+        <div className="flex justify-between"><span>Current Balance (Principal)</span><span>{formatCurrency(loan.balance)}</span></div>
+
+        {statement && (
+          <>
+            <h2>Payment Summary</h2>
+            <div className="flex justify-between"><span>Total Paid</span><span>{formatCurrency(statement.summary.total_paid)}</span></div>
+            <div className="flex justify-between"><span>Total Interest Charged</span><span>{formatCurrency(statement.summary.total_interest)}</span></div>
+            <div className="flex justify-between"><span>Total Penalties</span><span>{formatCurrency(statement.summary.total_penalties)}</span></div>
+            <div className="flex justify-between"><span>Outstanding Balance</span><span>{formatCurrency(statement.summary.current_balance)}</span></div>
+          </>
+        )}
+
+        {statement && statement.transactions.length > 0 && (
+          <>
+            <h2>Transaction History</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th style={{ textAlign: 'right' }}>Balance B/D</th>
+                  <th style={{ textAlign: 'right' }}>Payment</th>
+                  <th style={{ textAlign: 'right' }}>Interest</th>
+                  <th style={{ textAlign: 'right' }}>Penalty</th>
+                  <th style={{ textAlign: 'right' }}>Balance</th>
+                </tr>
+              </thead>
+              <tbody>
+                {statement.transactions.map((t, i) => (
+                  <tr key={i}>
+                    <td>{formatDate(t.date)}</td>
+                    <td>{t.type}</td>
+                    <td style={{ textAlign: 'right' }}>{formatCurrency(t.bal_bd)}</td>
+                    <td style={{ textAlign: 'right' }}>{t.payment > 0 ? formatCurrency(t.payment) : '-'}</td>
+                    <td style={{ textAlign: 'right' }}>{t.interest > 0 ? formatCurrency(t.interest) : '-'}</td>
+                    <td style={{ textAlign: 'right' }}>{t.penalty > 0 ? formatCurrency(t.penalty) : '-'}</td>
+                    <td style={{ textAlign: 'right' }}>{formatCurrency(t.balance)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        )}
+
+        <h2>Timeline</h2>
+        <div className="flex justify-between"><span>Application Date</span><span>{formatDate(loan.created_at)}</span></div>
+        <div className="flex justify-between"><span>Release Date</span><span>{loan.loan_release_date ? formatDate(loan.loan_release_date) : 'N/A'}</span></div>
+        <div className="flex justify-between"><span>Due Date</span><span>{formatDate(loan.loan_due_date)}</span></div>
+
+        {loan.guarantors && loan.guarantors.length > 0 && (
+          <>
+            <h2>Guarantors</h2>
+            {loan.guarantors.map((g: any, i: number) => (
+              <div key={i} className="flex justify-between">
+                <span>{g.business_partner?.full_name || 'N/A'}</span>
+                <span>{formatCurrency(g.amount_guaranteed)}</span>
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+
+      {/* Screen layout below */}
       {/* Header - Hidden during print */}
       <Card className="border-b-solid p-6 shadow-lg no-print">
         <div className="border-b-solid max-w-7xl mx-auto">
@@ -356,6 +487,110 @@ export default function LoanDetails() {
             </div>
           </div>
         </div>
+
+        {/* Financial Breakdown */}
+        {statement && (
+          <div className="bg-card rounded-lg shadow border p-6 mt-6 break-inside-avoid">
+            <div className="flex items-center mb-4">
+              <TrendingUp className="text-primary mr-2" size={20} />
+              <h2 className="text-xl font-semibold">Financial Breakdown</h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <div className="bg-green-50 rounded-lg p-4">
+                  <p className="text-sm text-green-700 font-medium">Total Paid</p>
+                  <p className="font-bold text-2xl text-green-600">{formatCurrency(statement.summary.total_paid)}</p>
+                </div>
+                <div className="bg-blue-50 rounded-lg p-4">
+                  <p className="text-sm text-blue-700 font-medium">Total Interest</p>
+                  <p className="font-bold text-2xl text-blue-600">{formatCurrency(statement.summary.total_interest)}</p>
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="bg-red-50 rounded-lg p-4">
+                  <p className="text-sm text-red-700 font-medium">Total Penalties</p>
+                  <p className="font-bold text-2xl text-red-600">{formatCurrency(statement.summary.total_penalties)}</p>
+                </div>
+                <div className="bg-orange-50 rounded-lg p-4">
+                  <p className="text-sm text-orange-700 font-medium">Outstanding Balance</p>
+                  <p className="font-bold text-2xl text-orange-600">{formatCurrency(statement.summary.current_balance)}</p>
+                </div>
+              </div>
+            </div>
+            {/* Progress bar */}
+            {parseFloat(loan.repayment_amount) > 0 && (
+              <div className="mt-6 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">Repayment Progress</span>
+                  <span className="text-muted-foreground">
+                    {Math.round((statement.summary.total_paid / parseFloat(loan.repayment_amount)) * 100)}%
+                  </span>
+                </div>
+                <Progress
+                  value={(statement.summary.total_paid / parseFloat(loan.repayment_amount)) * 100}
+                  className="h-3"
+                />
+                <div className="flex justify-between text-xs text-muted-foreground">
+                  <span>Paid: {formatCurrency(statement.summary.total_paid)}</span>
+                  <span>Total: {formatCurrency(loan.repayment_amount)}</span>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Transaction History */}
+        {statement && statement.transactions.length > 0 && (
+          <div className="bg-card rounded-lg shadow border p-6 mt-6 break-inside-avoid">
+            <div className="flex items-center mb-4">
+              <Calendar className="text-primary mr-2" size={20} />
+              <h2 className="text-xl font-semibold">Transaction History</h2>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Date</th>
+                    <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">Type</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Balance B/D</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Payment</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Interest</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Penalty</th>
+                    <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {statement.transactions.map((transaction, index) => (
+                    <tr key={index} className="border-b hover:bg-muted/50">
+                      <td className="py-3 px-4 text-sm">{formatDate(transaction.date)}</td>
+                      <td className="py-3 px-4">
+                        <Badge
+                          variant={transaction.type.toLowerCase() === 'payment' ? 'default' : 'secondary'}
+                          className="text-xs"
+                        >
+                          {transaction.type}
+                        </Badge>
+                      </td>
+                      <td className="py-3 px-4 text-sm text-right">{formatCurrency(transaction.bal_bd)}</td>
+                      <td className="py-3 px-4 text-sm text-right text-green-600">
+                        {transaction.payment > 0 ? formatCurrency(transaction.payment) : '-'}
+                      </td>
+                      <td className="py-3 px-4 text-sm text-right text-blue-600">
+                        {transaction.interest > 0 ? formatCurrency(transaction.interest) : '-'}
+                      </td>
+                      <td className="py-3 px-4 text-sm text-right text-red-600">
+                        {transaction.penalty > 0 ? formatCurrency(transaction.penalty) : '-'}
+                      </td>
+                      <td className="py-3 px-4 text-sm text-right font-semibold">
+                        {formatCurrency(transaction.balance)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
 
         {/* Loan Information */}
         <div className="bg-card rounded-lg shadow border p-6 mt-6 break-inside-avoid">
