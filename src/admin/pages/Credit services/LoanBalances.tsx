@@ -244,16 +244,12 @@ export default function LoanBalances() {
       doc.setFontSize(10);
       doc.setFont('helvetica', 'normal');
       doc.text(`Generated on: ${new Date().toLocaleString()}`, 14, 32);
-      doc.text(`Total Loans: ${filteredLoans.length}`, 14, 38);
-      doc.text(`Total Principal: ${formatCurrency(totalPrincipal)}`, 14, 44);
-      doc.text(`Total Interest Accrued: ${formatCurrency(totalInterest)}`, 14, 50);
-      doc.text(`Total Outstanding: ${formatCurrency(totalOutstanding)}`, 14, 56);
-      doc.text(`Loans in Arrears: ${arrearsLoans.length} (${formatCurrency(totalArrears)})`, 14, 62);
 
-      const startY = 70;
+      const startY = 40;
 
       if (view === 'customers') {
-        const tableData = customerSummaries.map((c) => [
+        const tableData = customerSummaries.map((c, idx) => [
+          String(idx + 1),
           c.fullName,
           c.phone,
           String(c.loanCount),
@@ -264,23 +260,44 @@ export default function LoanBalances() {
           String(c.maxDaysInArrears),
         ]);
 
+        // Add totals row
+        tableData.push([
+          '',
+          'TOTALS',
+          '',
+          String(filteredLoans.length),
+          formatCurrency(totalPrincipal),
+          formatCurrency(totalInterest),
+          formatCurrency(totalOutstanding),
+          formatCurrency(totalArrears),
+          String(arrearsLoans.length),
+        ]);
+
         autoTable(doc, {
-          head: [['Customer', 'Phone', 'Loans', 'Principal', 'Interest', 'Balance', 'Arrears', 'Days in Arrears']],
+          head: [['#', 'Customer', 'Phone', 'Loans', 'Principal', 'Interest', 'Balance', 'Arrears', 'Days in Arrears']],
           body: tableData,
           startY,
           styles: { fontSize: 8, cellPadding: 2 },
           headStyles: { fillColor: [66, 66, 66], fontStyle: 'bold' },
           alternateRowStyles: { fillColor: [245, 245, 245] },
           columnStyles: {
-            3: { halign: 'right' },
+            0: { halign: 'center', cellWidth: 10 },
             4: { halign: 'right' },
             5: { halign: 'right' },
             6: { halign: 'right' },
             7: { halign: 'right' },
+            8: { halign: 'center' },
+          },
+          didParseCell: (data) => {
+            if (data.row.index === tableData.length - 1) {
+              data.cell.styles.fontStyle = 'bold';
+              data.cell.styles.fillColor = [230, 230, 230];
+            }
           },
         });
       } else {
-        const tableData = filteredLoans.map((loan) => [
+        const tableData = filteredLoans.map((loan, idx) => [
+          String(idx + 1),
           loan.loan_number,
           loan.borrower?.full_name || 'Unknown',
           loan.loan_type?.loanType || 'N/A',
@@ -293,19 +310,41 @@ export default function LoanBalances() {
           formatDate(loan.loan_due_date),
         ]);
 
+        // Add totals row
+        tableData.push([
+          '',
+          'TOTALS',
+          '',
+          '',
+          formatCurrency(totalPrincipal),
+          formatCurrency(totalInterest),
+          formatCurrency(totalOutstanding),
+          formatCurrency(totalArrears),
+          String(arrearsLoans.length),
+          '',
+          '',
+        ]);
+
         autoTable(doc, {
-          head: [['Loan #', 'Customer', 'Type', 'Principal', 'Interest', 'Balance', 'Arrears', 'Days', 'Status', 'Due Date']],
+          head: [['#', 'Loan #', 'Customer', 'Type', 'Principal', 'Interest', 'Balance', 'Arrears', 'Days', 'Status', 'Due Date']],
           body: tableData,
           startY,
           styles: { fontSize: 8, cellPadding: 2 },
           headStyles: { fillColor: [66, 66, 66], fontStyle: 'bold' },
           alternateRowStyles: { fillColor: [245, 245, 245] },
           columnStyles: {
-            3: { halign: 'right' },
+            0: { halign: 'center', cellWidth: 10 },
             4: { halign: 'right' },
             5: { halign: 'right' },
             6: { halign: 'right' },
             7: { halign: 'right' },
+            8: { halign: 'center' },
+          },
+          didParseCell: (data) => {
+            if (data.row.index === tableData.length - 1) {
+              data.cell.styles.fontStyle = 'bold';
+              data.cell.styles.fillColor = [230, 230, 230];
+            }
           },
         });
       }
@@ -514,6 +553,7 @@ export default function LoanBalances() {
                   <Table>
                     <TableHeader>
                       <TableRow>
+                        <TableHead className="w-12">#</TableHead>
                         <TableHead>Customer</TableHead>
                         <TableHead>Phone</TableHead>
                         <TableHead className="text-center">Loans</TableHead>
@@ -526,8 +566,9 @@ export default function LoanBalances() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {customerSummaries.map((c) => (
+                      {customerSummaries.map((c, idx) => (
                         <TableRow key={c.borrowerId}>
+                          <TableCell className="text-muted-foreground">{idx + 1}</TableCell>
                           <TableCell className="font-medium">{c.fullName}</TableCell>
                           <TableCell>{c.phone}</TableCell>
                           <TableCell className="text-center">{c.loanCount}</TableCell>
@@ -569,6 +610,16 @@ export default function LoanBalances() {
                           </TableCell>
                         </TableRow>
                       ))}
+                      <TableRow className="bg-muted/50 font-semibold">
+                        <TableCell colSpan={3}>Totals</TableCell>
+                        <TableCell className="text-center">{filteredLoans.length}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalPrincipal)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalInterest)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalOutstanding)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalArrears)}</TableCell>
+                        <TableCell className="text-center">{arrearsLoans.length}</TableCell>
+                        <TableCell></TableCell>
+                      </TableRow>
                     </TableBody>
                   </Table>
                 </div>
@@ -606,6 +657,7 @@ export default function LoanBalances() {
                   <Table>
                     <TableHeader>
                       <TableRow>
+                        <TableHead className="w-12">#</TableHead>
                         <TableHead>Loan #</TableHead>
                         <TableHead>Customer</TableHead>
                         <TableHead>Type</TableHead>
@@ -620,8 +672,9 @@ export default function LoanBalances() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {filteredLoans.map((loan) => (
+                      {filteredLoans.map((loan, idx) => (
                         <TableRow key={loan.id}>
+                          <TableCell className="text-muted-foreground">{idx + 1}</TableCell>
                           <TableCell className="font-medium">{loan.loan_number}</TableCell>
                           <TableCell>{loan.borrower?.full_name || 'Unknown'}</TableCell>
                           <TableCell>{loan.loan_type?.loanType || 'N/A'}</TableCell>
@@ -654,6 +707,15 @@ export default function LoanBalances() {
                           </TableCell>
                         </TableRow>
                       ))}
+                      <TableRow className="bg-muted/50 font-semibold">
+                        <TableCell colSpan={4}>Totals</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalPrincipal)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalInterest)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalOutstanding)}</TableCell>
+                        <TableCell className="text-right">{formatCurrency(totalArrears)}</TableCell>
+                        <TableCell className="text-center">{arrearsLoans.length}</TableCell>
+                        <TableCell colSpan={3}></TableCell>
+                      </TableRow>
                     </TableBody>
                   </Table>
                 </div>
