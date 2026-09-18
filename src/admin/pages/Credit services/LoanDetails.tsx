@@ -200,61 +200,61 @@ export default function LoanDetails() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Print-only clean document layout */}
+    <>
+      {/* ========== PRINT-ONLY DOCUMENT ========== */}
       <div className="print-only" style={{ display: 'none' }}>
         <div className="print-header">
           <h1>Loan Application Details</h1>
           <p>Loan Number: {loan.loan_number} | Generated: {new Date().toLocaleDateString()}</p>
         </div>
 
-        <h2>Borrower Information</h2>
-        <div className="flex justify-between"><span>Full Name</span><span>{loan.borrower.full_name}</span></div>
-        <div className="flex justify-between"><span>Phone</span><span>{loan.borrower.phone}</span></div>
-        <div className="flex justify-between"><span>ID Number</span><span>{loan.borrower.id_number}</span></div>
-        {loan.borrower.email && <div className="flex justify-between"><span>Email</span><span>{loan.borrower.email}</span></div>}
-        {loan.borrower.nationality && <div className="flex justify-between"><span>Nationality</span><span>{loan.borrower.nationality}</span></div>}
+        <div className="print-section-title">Borrower Information</div>
+        <div className="print-row"><span className="label">Full Name</span><span className="value">{loan.borrower.full_name}</span></div>
+        <div className="print-row"><span className="label">Phone</span><span className="value">{loan.borrower.phone}</span></div>
+        <div className="print-row"><span className="label">ID Number</span><span className="value">{loan.borrower.id_number}</span></div>
+        {loan.borrower.email && <div className="print-row"><span className="label">Email</span><span className="value">{loan.borrower.email}</span></div>}
+        {loan.borrower.nationality && <div className="print-row"><span className="label">Nationality</span><span className="value">{loan.borrower.nationality}</span></div>}
 
-        <h2>Loan Information</h2>
-        <div className="flex justify-between"><span>Loan Number</span><span>{loan.loan_number}</span></div>
-        <div className="flex justify-between"><span>Loan Type</span><span>{loan.loan_type.loanType} ({loan.loan_type.loanCode})</span></div>
-        <div className="flex justify-between"><span>Status</span><span>{loan.loan_status?.toUpperCase()}</span></div>
-        <div className="flex justify-between"><span>Purpose</span><span>{loan.purpose}</span></div>
-        <div className="flex justify-between"><span>Collateral</span><span>{loan.collateral || 'None'}</span></div>
-        <div className="flex justify-between"><span>Duration</span><span>{loan.loan_duration} {loan.duration_period}</span></div>
-        <div className="flex justify-between"><span>Interest Method</span><span>{loan.interest_method}</span></div>
-        <div className="flex justify-between"><span>Interest Rate</span><span>{loan.loan_type.interest_rate}%</span></div>
+        <div className="print-section-title">Loan Information</div>
+        <div className="print-row"><span className="label">Loan Number</span><span className="value">{loan.loan_number}</span></div>
+        <div className="print-row"><span className="label">Loan Type</span><span className="value">{loan.loan_type.loanType} ({loan.loan_type.loanCode})</span></div>
+        <div className="print-row"><span className="label">Status</span><span className="value">{loan.loan_status?.toUpperCase()}</span></div>
+        <div className="print-row"><span className="label">Purpose</span><span className="value">{loan.purpose}</span></div>
+        <div className="print-row"><span className="label">Collateral</span><span className="value">{loan.collateral || 'None'}</span></div>
+        <div className="print-row"><span className="label">Duration</span><span className="value">{loan.loan_duration} {loan.duration_period}</span></div>
+        <div className="print-row"><span className="label">Interest Method</span><span className="value">{loan.interest_method}</span></div>
+        <div className="print-row"><span className="label">Interest Rate</span><span className="value">{loan.loan_type.interest_rate}%</span></div>
 
-        <h2>Financial Summary</h2>
-        <div className="flex justify-between"><span>Principal Amount</span><span>{formatCurrency(loan.principal_amount)}</span></div>
-        <div className="flex justify-between"><span>Interest Amount</span><span>{formatCurrency(loan.interest_amount)}</span></div>
-        <div className="flex justify-between"><span>Total Repayment</span><span>{formatCurrency(loan.repayment_amount)}</span></div>
-        <div className="flex justify-between"><span>Monthly Payment</span><span>{formatCurrency(loan.monthly_payment)}</span></div>
-        <div className="flex justify-between"><span>Current Balance (Principal)</span><span>{formatCurrency(loan.balance)}</span></div>
+        <div className="print-section-title">Financial Summary</div>
+        <div className="print-row"><span className="label">Principal Amount</span><span className="value">{formatCurrency(loan.principal_amount)}</span></div>
+        <div className="print-row"><span className="label">Interest Amount</span><span className="value">{formatCurrency(loan.interest_amount)}</span></div>
+        <div className="print-row"><span className="label">Total Repayment</span><span className="value">{formatCurrency(loan.repayment_amount)}</span></div>
+        <div className="print-row"><span className="label">Monthly Payment</span><span className="value">{formatCurrency(loan.monthly_payment)}</span></div>
+        <div className="print-row"><span className="label">Current Balance (Principal)</span><span className="value">{formatCurrency(loan.balance)}</span></div>
 
         {statement && (
           <>
-            <h2>Payment Summary</h2>
-            <div className="flex justify-between"><span>Total Paid</span><span>{formatCurrency(statement.summary.total_paid)}</span></div>
-            <div className="flex justify-between"><span>Total Interest Charged</span><span>{formatCurrency(statement.summary.total_interest)}</span></div>
-            <div className="flex justify-between"><span>Total Penalties</span><span>{formatCurrency(statement.summary.total_penalties)}</span></div>
-            <div className="flex justify-between"><span>Outstanding Balance</span><span>{formatCurrency(statement.summary.current_balance)}</span></div>
+            <div className="print-section-title">Payment Summary</div>
+            <div className="print-row"><span className="label">Total Paid</span><span className="value">{formatCurrency(statement.summary.total_paid)}</span></div>
+            <div className="print-row"><span className="label">Total Interest Charged</span><span className="value">{formatCurrency(statement.summary.total_interest)}</span></div>
+            <div className="print-row"><span className="label">Total Penalties</span><span className="value">{formatCurrency(statement.summary.total_penalties)}</span></div>
+            <div className="print-row"><span className="label">Outstanding Balance</span><span className="value">{formatCurrency(statement.summary.current_balance)}</span></div>
           </>
         )}
 
         {statement && statement.transactions.length > 0 && (
           <>
-            <h2>Transaction History</h2>
-            <table>
+            <div className="print-section-title">Transaction History</div>
+            <table className="print-table">
               <thead>
                 <tr>
                   <th>Date</th>
                   <th>Type</th>
-                  <th style={{ textAlign: 'right' }}>Balance B/D</th>
-                  <th style={{ textAlign: 'right' }}>Payment</th>
-                  <th style={{ textAlign: 'right' }}>Interest</th>
-                  <th style={{ textAlign: 'right' }}>Penalty</th>
-                  <th style={{ textAlign: 'right' }}>Balance</th>
+                  <th className="text-right">Balance B/D</th>
+                  <th className="text-right">Payment</th>
+                  <th className="text-right">Interest</th>
+                  <th className="text-right">Penalty</th>
+                  <th className="text-right">Balance</th>
                 </tr>
               </thead>
               <tbody>
@@ -262,11 +262,11 @@ export default function LoanDetails() {
                   <tr key={i}>
                     <td>{formatDate(t.date)}</td>
                     <td>{t.type}</td>
-                    <td style={{ textAlign: 'right' }}>{formatCurrency(t.bal_bd)}</td>
-                    <td style={{ textAlign: 'right' }}>{t.payment > 0 ? formatCurrency(t.payment) : '-'}</td>
-                    <td style={{ textAlign: 'right' }}>{t.interest > 0 ? formatCurrency(t.interest) : '-'}</td>
-                    <td style={{ textAlign: 'right' }}>{t.penalty > 0 ? formatCurrency(t.penalty) : '-'}</td>
-                    <td style={{ textAlign: 'right' }}>{formatCurrency(t.balance)}</td>
+                    <td className="text-right">{formatCurrency(t.bal_bd)}</td>
+                    <td className="text-right">{t.payment > 0 ? formatCurrency(t.payment) : '-'}</td>
+                    <td className="text-right">{t.interest > 0 ? formatCurrency(t.interest) : '-'}</td>
+                    <td className="text-right">{t.penalty > 0 ? formatCurrency(t.penalty) : '-'}</td>
+                    <td className="text-right">{formatCurrency(t.balance)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -274,26 +274,26 @@ export default function LoanDetails() {
           </>
         )}
 
-        <h2>Timeline</h2>
-        <div className="flex justify-between"><span>Application Date</span><span>{formatDate(loan.created_at)}</span></div>
-        <div className="flex justify-between"><span>Release Date</span><span>{loan.loan_release_date ? formatDate(loan.loan_release_date) : 'N/A'}</span></div>
-        <div className="flex justify-between"><span>Due Date</span><span>{formatDate(loan.loan_due_date)}</span></div>
+        <div className="print-section-title">Timeline</div>
+        <div className="print-row"><span className="label">Application Date</span><span className="value">{formatDate(loan.created_at)}</span></div>
+        <div className="print-row"><span className="label">Release Date</span><span className="value">{loan.loan_release_date ? formatDate(loan.loan_release_date) : 'N/A'}</span></div>
+        <div className="print-row"><span className="label">Due Date</span><span className="value">{formatDate(loan.loan_due_date)}</span></div>
 
         {loan.guarantors && loan.guarantors.length > 0 && (
           <>
-            <h2>Guarantors</h2>
+            <div className="print-section-title">Guarantors</div>
             {loan.guarantors.map((g: any, i: number) => (
-              <div key={i} className="flex justify-between">
-                <span>{g.business_partner?.full_name || 'N/A'}</span>
-                <span>{formatCurrency(g.amount_guaranteed)}</span>
+              <div key={i} className="print-row">
+                <span className="label">{g.business_partner?.full_name || 'N/A'}</span>
+                <span className="value">{formatCurrency(g.amount_guaranteed)}</span>
               </div>
             ))}
           </>
         )}
       </div>
 
-      {/* Screen layout below - hidden during print */}
-      <div className="no-print">
+      {/* ========== SCREEN-ONLY LAYOUT ========== */}
+      <div className="screen-only min-h-screen bg-background">
       <Card className="border-b-solid p-6 shadow-lg no-print">
         <div className="border-b-solid max-w-7xl mx-auto">
           <div className="flex justify-between items-start">
@@ -725,6 +725,6 @@ export default function LoanDetails() {
         cancelText="Cancel"
       />
       </div>
-    </div>
+    </>
   );
 }

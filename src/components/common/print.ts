@@ -20,16 +20,16 @@ export const printStyles = `
             color: #000;
           }
           
-          /* Hide everything except print-only */
-          body > *:not(.print-only):not(.print-header):not(script):not(style):not(link) {
+          /* Hide screen layout, show print layout */
+          .screen-only {
             display: none !important;
           }
           
-          /* Show print content */
           .print-only {
             display: block !important;
           }
           
+          /* Print header */
           .print-header {
             display: block !important;
             text-align: center;
@@ -50,16 +50,16 @@ export const printStyles = `
           }
           
           /* Section headings */
-          h2 {
-            font-size: 14px !important;
+          .print-section-title {
+            font-size: 13px !important;
             font-weight: bold !important;
-            margin: 16px 0 6px 0 !important;
+            margin: 14px 0 4px 0 !important;
             border-bottom: 1px solid #000 !important;
-            padding-bottom: 3px !important;
+            padding-bottom: 2px !important;
           }
           
           /* Key-value rows */
-          .flex.justify-between {
+          .print-row {
             display: flex !important;
             justify-content: space-between !important;
             padding: 3px 0 !important;
@@ -67,27 +67,39 @@ export const printStyles = `
             font-size: 11px !important;
           }
           
+          .print-row .label {
+            color: #333 !important;
+          }
+          
+          .print-row .value {
+            font-weight: bold !important;
+            text-align: right !important;
+          }
+          
           /* Tables */
-          table {
+          .print-table {
             width: 100% !important;
             border-collapse: collapse !important;
             margin: 8px 0 !important;
             font-size: 10px !important;
           }
           
-          th, td {
+          .print-table th,
+          .print-table td {
             padding: 4px 8px !important;
             text-align: left !important;
             border-bottom: 1px solid #ccc !important;
           }
           
-          th {
+          .print-table th {
             font-weight: bold !important;
             border-bottom: 2px solid #000 !important;
+            background: #f0f0f0 !important;
           }
           
-          /* Paragraph spacing */
-          p { margin: 2px 0 !important; }
+          .print-table .text-right {
+            text-align: right !important;
+          }
         }
       </style>
 `;
