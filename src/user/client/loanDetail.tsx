@@ -68,7 +68,7 @@ interface LoanDetail extends Loan {
   loan_type: {
     loanCode: string
     loanType: string
-    interest_rate: string
+    interest_rate: number
   }
   guarantors: {
     id: number
