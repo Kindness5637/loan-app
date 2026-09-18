@@ -143,18 +143,10 @@ const Header = ({
             <div className="flex items-center gap-1">
               {/* Notification Bell */}
               {showNotifications && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-9 w-9 relative"
-                  onClick={onNotificationClick}
-                >
-                  <NotificationBell 
-                    count={notificationCount}
-                    className="h-4 w-4"
-                  />
-                  <span className="sr-only">Notifications</span>
-                </Button>
+                <NotificationBell 
+                  count={notificationCount}
+                  className="h-4 w-4"
+                />
               )}
 
               {/* Theme Toggle */}
